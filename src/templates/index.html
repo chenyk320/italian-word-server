@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>意大利语学习分析系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>意大利语词汇分析系统</h1>
+        
+        <!-- 控制面板 -->
+        <div class="control-panel">
+            <div class="filter-group">
+                <label>选择日期：
+                    <select id="dateSelect">
+                        {% for date in dates %}
+                        <option value="{{ date }}" {% if loop.first %}selected{% endif %}>{{ date }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+                
+                <label>排序方式：
+                    <select id="sortSelect">
+                        <option value="desc">高频优先</option>
+                        <option value="asc">低频优先</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <!-- 加载状态 -->
+        <div id="loading">加载中...</div>
+        
+        <!-- 单词列表容器 -->
+        <div id="word-list"></div>
+        
+        <!-- 分页控件 -->
+        <div class="pagination">
+            <button id="prevPage" disabled>上一页</button>
+            <span id="pageInfo">第 1 页 / 共 1 页</span>
+            <button id="nextPage" disabled>下一页</button>
+        </div>
+    </div>
+
+    <script>
+        // 状态管理
+        let currentPage = 1;
+        let totalPages = 1;
+        let totalWords = 0;
+
+        // 初始化加载
+        function loadData() {
+            const date = document.getElementById('dateSelect').value;
+            const sort = document.getElementById('sortSelect').value;
+            const loading = document.getElementById('loading');
+            const wordList = document.getElementById('word-list');
+            
+            // 显示加载状态
+            loading.innerHTML = '加载中...';
+            wordList.innerHTML = '';
+            
+            fetch(`/words?date=${date}&sort=${sort}&page=${currentPage}`)
+                .then(response => {
+                    if (!response.ok) throw new Error('网络响应异常');
+                    return response.json();
+                })
+                .then(data => {
+                    if(data.error) {
+                        loading.innerHTML = `错误：${data.error}`;
+                        return;
+                    }
+                    
+                    // 更新分页信息
+                    updatePagination(data.pagination);
+                    
+                    // 清空并渲染新数据
+                    loading.style.display = 'none';
+                    wordList.innerHTML = '';
+                    data.words.forEach(word => {
+                        wordList.appendChild(createWordElement(word));
+                    });
+                })
+                .catch(error => {
+                    console.error('获取数据失败:', error);
+                    loading.innerHTML = '数据加载失败';
+                });
+        }
+
+        // 创建单词卡片
+        function createWordElement(word) {
+            const div = document.createElement('div');
+            div.className = 'word-card';
+            div.innerHTML = `
+                <div class="word-header">
+                    ${word.word}
+                    <span class="date-tag">${word.date}</span>
+                </div>
+                <div class="word-meta">
+                    <span>出现次数：${word.count}</span>
+                    <span class="translation">${word.translation}</span>
+                </div>
+            `;
+            return div;
+        }
+
+        // 更新分页状态
+        function updatePagination(pagination) {
+            currentPage = pagination.current_page;
+            totalPages = pagination.total_pages;
+            totalWords = pagination.total_words;
+            
+            document.getElementById('pageInfo').textContent = 
+                `第 ${currentPage} 页 / 共 ${totalPages} 页 (总计 ${totalWords} 词)`;
+            
+            document.getElementById('prevPage').disabled = (currentPage === 1);
+            document.getElementById('nextPage').disabled = (currentPage === totalPages);
+        }
+
+        // 事件监听
+        document.getElementById('dateSelect').addEventListener('change', () => {
+            currentPage = 1;  // 切换日期时重置到第一页
+            loadData();
+        });
+
+        document.getElementById('sortSelect').addEventListener('change', () => {
+            currentPage = 1;  // 切换排序时重置到第一页
+            loadData();
+        });
+
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if(currentPage > 1) {
+                currentPage--;
+                loadData();
+            }
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if(currentPage < totalPages) {
+                currentPage++;
+                loadData();
+            }
+        });
+
+        // 初始加载
+        loadData();
+    </script>
+</body>
+</html>

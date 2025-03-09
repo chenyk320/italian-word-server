@@ -1,0 +1,86 @@
+/* 新增控制面板样式 */
+.control-panel {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2c3e50;
+}
+
+select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f8f9fa;
+}
+
+.date-tag {
+    background: #e74c3c;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    float: right;
+}
+
+.translation {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+/* 优化移动端显示 */
+@media (max-width: 480px) {
+    .filter-group {
+        flex-direction: column;
+    }
+    
+    select {
+        width: 100%;
+    }
+}
+
+/* 分页控件 */
+.pagination {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+}
+
+.pagination button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.pagination button:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: #2980b9;
+}
+
+#pageInfo {
+    color: #7f8c8d;
+    font-size: 0.9em;
+}

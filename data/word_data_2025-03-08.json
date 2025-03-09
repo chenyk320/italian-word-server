@@ -1,0 +1,942 @@
+[
+  {
+    "text": "a",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "la",
+    "size": 66,
+    "count": 26
+  },
+  {
+    "text": "casa",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "più",
+    "size": 19,
+    "count": 8
+  },
+  {
+    "text": "grande",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "è",
+    "size": 53,
+    "count": 21
+  },
+  {
+    "text": "una",
+    "size": 19,
+    "count": 8
+  },
+  {
+    "text": "conseguenza",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "alla",
+    "size": 37,
+    "count": 15
+  },
+  {
+    "text": "condizione",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "di",
+    "size": 100,
+    "count": 39
+  },
+  {
+    "text": "avere",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "mila",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "euro",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "frase",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "numero",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "il",
+    "size": 24,
+    "count": 10
+  },
+  {
+    "text": "in",
+    "size": 19,
+    "count": 8
+  },
+  {
+    "text": "esclusiva",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "su",
+    "size": 24,
+    "count": 10
+  },
+  {
+    "text": "disney",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "plus",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "sono",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "donna",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "delle",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "pulizie",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "con",
+    "size": 16,
+    "count": 7
+  },
+  {
+    "text": "un",
+    "size": 29,
+    "count": 12
+  },
+  {
+    "text": "qui",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "m",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "e",
+    "size": 47,
+    "count": 19
+  },
+  {
+    "text": "web",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "p",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "backend",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "hai",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "capito",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "check",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "out",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "che",
+    "size": 68,
+    "count": 27
+  },
+  {
+    "text": "converte",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "al",
+    "size": 21,
+    "count": 9
+  },
+  {
+    "text": "mondo",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "i",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "tuoi",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "clienti",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "possono",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "eseguire",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "da",
+    "size": 21,
+    "count": 9
+  },
+  {
+    "text": "qua",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "ovunque",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "questa",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "musica",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "per",
+    "size": 16,
+    "count": 7
+  },
+  {
+    "text": "le",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "tue",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "orecchie",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "qualsiasi",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "essere",
+    "size": 16,
+    "count": 7
+  },
+  {
+    "text": "pronti",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "momento",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "del",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "brindisi",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "giusto",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "cin",
+    "size": 24,
+    "count": 10
+  },
+  {
+    "text": "un'espressione",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "onomatopeica",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "ricorda",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "rumore",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "dei",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "bicchieri",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "quando",
+    "size": 53,
+    "count": 21
+  },
+  {
+    "text": "si",
+    "size": 32,
+    "count": 13
+  },
+  {
+    "text": "sbattono",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "diciamo",
+    "size": 53,
+    "count": 21
+  },
+  {
+    "text": "tra",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "loro",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "quindi",
+    "size": 63,
+    "count": 25
+  },
+  {
+    "text": "seconda",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "espressione",
+    "size": 40,
+    "count": 16
+  },
+  {
+    "text": "salute",
+    "size": 66,
+    "count": 26
+  },
+  {
+    "text": "letteralmente",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "vuol",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "dire",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "health",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "dite",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "augurate",
+    "size": 29,
+    "count": 12
+  },
+  {
+    "text": "buona",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "alle",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "persone",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "cui",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "state",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "brindando",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "mi",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "raccomando",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "sente",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "saluti",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "terza",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "vostra",
+    "size": 21,
+    "count": 9
+  },
+  {
+    "text": "o",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "tua",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "abbiamo",
+    "size": 16,
+    "count": 7
+  },
+  {
+    "text": "preposizione",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "articolata",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "formata",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "poi",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "aggettivo",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "possessivo",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "se",
+    "size": 42,
+    "count": 17
+  },
+  {
+    "text": "volete",
+    "size": 29,
+    "count": 12
+  },
+  {
+    "text": "potete",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "aggiungere",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "però",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "lo",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "metto",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "parentesi",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "perché",
+    "size": 29,
+    "count": 12
+  },
+  {
+    "text": "dico",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "our",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "house",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "witchers",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "teo",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "awarehouse",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "tutte",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "tre",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "queste",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "espressioni",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "ugualmente",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "utilizzate",
+    "size": 1,
+    "count": 1
+  },
+  {
+    "text": "scegliere",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "quella",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "preferite",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "non",
+    "size": 21,
+    "count": 9
+  },
+  {
+    "text": "sbaglierete",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "fatemi",
+    "size": 29,
+    "count": 12
+  },
+  {
+    "text": "sapere",
+    "size": 29,
+    "count": 12
+  },
+  {
+    "text": "nei",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "commenti",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "sotto",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "qual",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "l'espressione",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "usa",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "brindare",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "nel",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "vostro",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "paese",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "nella",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "lingua",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "ok",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "anche",
+    "size": 37,
+    "count": 15
+  },
+  {
+    "text": "voi",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "usate",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "cincin",
+    "size": 24,
+    "count": 10
+  },
+  {
+    "text": "penso",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "sia",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "abbastanza",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "internazionale",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "come",
+    "size": 29,
+    "count": 12
+  },
+  {
+    "text": "dimenticatevi",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "iscrivervi",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "mio",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "canale",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "seguitemi",
+    "size": 14,
+    "count": 6
+  },
+  {
+    "text": "instagram",
+    "size": 19,
+    "count": 8
+  },
+  {
+    "text": "pubblico",
+    "size": 24,
+    "count": 10
+  },
+  {
+    "text": "sacco",
+    "size": 21,
+    "count": 9
+  },
+  {
+    "text": "foto",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "faccio",
+    "size": 11,
+    "count": 5
+  },
+  {
+    "text": "insta",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "stories",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "ascoltare",
+    "size": 8,
+    "count": 4
+  },
+  {
+    "text": "l'italiano",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "parlato",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "tutti",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "giorni",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "guardare",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "mie",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "storie",
+    "size": 6,
+    "count": 3
+  },
+  {
+    "text": "grazie",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "mille",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "aver",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "guardato",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "questo",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "video",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "noi",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "ci",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "vediamo",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "domani",
+    "size": 3,
+    "count": 2
+  },
+  {
+    "text": "ciao",
+    "size": 1,
+    "count": 1
+  }
+]
