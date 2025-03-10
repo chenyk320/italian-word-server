@@ -37,7 +37,7 @@ def get_cached_translation(text: str) -> str:
     """带缓存和异常处理的翻译函数"""
     try:
         return GoogleTranslator(
-            source='auto',
+            source='it',
             target='zh-CN'
         ).translate(
             text,
