@@ -130,22 +130,14 @@ def get_cached_translation(text: str) -> str:
         app.logger.error(f"未知翻译错误 [{text[:20]}]: {str(e)}")
         return "翻译错误"
 
-def process_word(word: dict) -> dict:
-    """处理单个单词的格式化"""
-    text = word.get('text', '').strip().lower()
-    if not text:
-        return None
-
-    return {
-        "word": text,
-        "translation": get_cached_translation(text),
-        "count": word.get('count', 0),
-        "date": word.get('date', '')
-    }
 
 @app.route('/')
 def index():
     return render_template('index.html', dates=get_available_dates())
+
+@app.route('/known_words')
+def known_words_page():
+    return render_template('known_words.html')
 
 @app.route('/words')
 def get_words():
