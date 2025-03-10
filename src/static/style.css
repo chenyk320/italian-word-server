@@ -129,3 +129,14 @@ select {
     cursor: pointer;
     margin-left: 10px;
 }
+.sync-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+}

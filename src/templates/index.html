@@ -29,17 +29,6 @@
                 </label>
             </div>
         </div>
-        <!-- 在控制面板后添加 -->
-        <button id="toggleKnownBtn" onclick="toggleKnownWords()">显示熟记单词</button>
-        
-        <div class="known-words-panel" id="knownWordsPanel">
-            <div class="known-words-header">
-                <h3>已熟记单词列表</h3>
-                <button onclick="refreshKnownWords()">刷新列表</button>
-            </div>
-            <div id="knownWordsList"></div>
-        </div>
-
         <!-- 加载状态 -->
         <div id="loading">加载中...</div>
         
@@ -92,13 +81,6 @@
                         wordList.appendChild(createWordElement(word));
                     });
                 })
-                .then(response => {
-                    if (response.status === 404) {
-                        if(date === 'known-words') return {words: []};
-                        throw new Error('数据不存在');
-                    }
-                    // 保持其他处理不变...
-                })
                 .catch(error => {
                     console.error('获取数据失败:', error);
                     loading.innerHTML = '数据加载失败';
@@ -118,7 +100,7 @@
                     <span>出现次数：${word.count}</span>
                     <span class="translation">${word.translation}</span>
                     <button class="mark-known-btn" 
-                            onclick="handleKnownWord('${word.word}', 'add')">
+                            onclick="handleKnownWord('${word.word}', '${word.translation}')">
                         标记为已掌握
                     </button>
                 </div>
@@ -161,15 +143,29 @@
                 });
         }
 
-        function handleKnownWord(word, action) {
-            fetch('/api/known-words', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({word, action})
-            }).then(() => {
-                if(action === 'add') loadData();
-                refreshKnownWords();
-            });
+        function handleKnownWord(word, translation) {
+            if(confirm(`确定将 ${word} 标记为已掌握吗？`)) {
+                fetch('/api/known-words', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        word: word,
+                        translation: translation,
+                        action: 'add'
+                    })
+                }).then(() => {
+                    loadData(); // 刷新主列表
+                    showSyncNotification();
+                });
+            }
+        }
+
+        function showSyncNotification() {
+            const notification = document.createElement('div');
+            notification.className = 'sync-notification';
+            notification.textContent = '✓ 已同步到熟记列表';
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 2000);
         }
         // 事件监听
         document.getElementById('dateSelect').addEventListener('change', () => {

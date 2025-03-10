@@ -28,41 +28,58 @@ KNOWN_WORDS_FILE = os.path.join(HISTORY_DIR, "known_words.json")
 # 初始化线程池
 executor = ThreadPoolExecutor(max_workers=MAX_WORKERS)
 
+# 后端修改（在原有代码基础上添加/修改以下内容
 
+# 初始化熟词列表（修改后的数据结构）
 if not os.path.exists(KNOWN_WORDS_FILE):
     with open(KNOWN_WORDS_FILE, 'w') as f:
         json.dump([], f)
 
 def get_known_words():
-    """获取已熟记单词列表"""
+    """获取已熟记单词列表（带翻译）"""
     with open(KNOWN_WORDS_FILE, 'r') as f:
-        return set(json.load(f))
+        return {item['word']: item['translation'] for item in json.load(f)}
 
-def update_known_words(word: str, action: str):
-    """更新熟词列表"""
+def update_known_words(word: str, translation: str, action: str):
+    """更新熟词列表（保存翻译）"""
     with open(KNOWN_WORDS_FILE, 'r+') as f:
-        words = set(json.load(f))
-        if action == 'add':
-            words.add(word.lower())
-        elif action == 'remove':
-            words.discard(word.lower())
+        words = json.load(f)
+        existing = next((w for w in words if w['word'] == word.lower()), None)
+        
+        if action == 'add' and not existing:
+            words.append({
+                "word": word.lower(),
+                "translation": translation,
+                "date_added": datetime.now().strftime("%Y-%m-%d %H:%M")
+            })
+        elif action == 'remove' and existing:
+            words = [w for w in words if w['word'] != word.lower()]
+            
         f.seek(0)
-        json.dump(list(words), f)
+        json.dump(words, f, ensure_ascii=False)
         f.truncate()
 
 # 添加新的API路由
-@app.route('/api/known-words', methods=['POST'])
+@app.route('/api/known-words', methods=['GET', 'POST'])
 def handle_known_words():
     try:
-        data = request.get_json()
-        word = data.get('word')
-        action = data.get('action')
-        
-        if not word or action not in ('add', 'remove'):
-            return jsonify({"error": "Invalid request"}), 400
+        if request.method == 'GET':
+            # 获取所有熟词
+            with open(KNOWN_WORDS_FILE, 'r') as f:
+                return jsonify({"words": json.load(f)})
+                
+        elif request.method == 'POST':
+            # 添加/删除熟词
+            data = request.get_json()
+            word = data.get('word')
+            translation = data.get('translation')
+            action = data.get('action')
             
-        update_known_words(word, action)
-        return jsonify({"status": "success"})
+            if not word or action not in ('add', 'remove'):
+                return jsonify({"error": "Invalid request"}), 400
+                
+            update_known_words(word, translation, action)
+            return jsonify({"status": "success"})
     
     except Exception as e:
         app.logger.error(f"熟词操作失败: {str(e)}")
@@ -72,7 +89,9 @@ def handle_known_words():
 def process_word(word: dict) -> dict:
     """处理单个单词的格式化"""
     text = word.get('text', '').strip().lower()
-    if not text or text in get_known_words():  # 过滤已熟记单词
+    known_words = get_known_words()
+    
+    if not text or text in known_words:  # 过滤已熟记单词
         return None
 
     return {
@@ -81,7 +100,6 @@ def process_word(word: dict) -> dict:
         "count": word.get('count', 0),
         "date": word.get('date', '')
     }
-
 
 def get_available_dates():
     """获取所有历史日期"""
