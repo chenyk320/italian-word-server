@@ -29,22 +29,23 @@
                 </label>
             </div>
         </div>
+        <!-- 在控制面板后添加 -->
+        <button id="toggleKnownBtn" onclick="toggleKnownWords()">显示熟记单词</button>
+        
+        <div class="known-words-panel" id="knownWordsPanel">
+            <div class="known-words-header">
+                <h3>已熟记单词列表</h3>
+                <button onclick="refreshKnownWords()">刷新列表</button>
+            </div>
+            <div id="knownWordsList"></div>
+        </div>
 
         <!-- 加载状态 -->
         <div id="loading">加载中...</div>
         
         <!-- 单词列表容器 -->
         <div id="word-list"></div>
-        
-        <!-- 熟词面板 -->
-        <div class="mastered-panel">
-            <h3>已掌握词汇 
-                <span id="masteredCount">0</span> 个
-                <button onclick="clearMastered()" class="clear-btn">清空</button>
-            </h3>
-            <div id="masteredList"></div>
-        </div>
-        
+
         <!-- 分页控件 -->
         <div class="pagination">
             <button id="prevPage" disabled>上一页</button>
@@ -91,6 +92,13 @@
                         wordList.appendChild(createWordElement(word));
                     });
                 })
+                .then(response => {
+                    if (response.status === 404) {
+                        if(date === 'known-words') return {words: []};
+                        throw new Error('数据不存在');
+                    }
+                    // 保持其他处理不变...
+                })
                 .catch(error => {
                     console.error('获取数据失败:', error);
                     loading.innerHTML = '数据加载失败';
@@ -109,6 +117,10 @@
                 <div class="word-meta">
                     <span>出现次数：${word.count}</span>
                     <span class="translation">${word.translation}</span>
+                    <button class="mark-known-btn" 
+                            onclick="handleKnownWord('${word.word}', 'add')">
+                        标记为已掌握
+                    </button>
                 </div>
             `;
             return div;
@@ -126,7 +138,39 @@
             document.getElementById('prevPage').disabled = (currentPage === 1);
             document.getElementById('nextPage').disabled = (currentPage === totalPages);
         }
+        //熟词
+        function toggleKnownWords() {
+            const panel = document.getElementById('knownWordsPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            if(panel.style.display === 'block') refreshKnownWords();
+        }
 
+        function refreshKnownWords() {
+            fetch('/words?date=known-words&page=1')
+                .then(res => res.json())
+                .then(data => {
+                    const list = document.getElementById('knownWordsList');
+                    list.innerHTML = data.words.map(word => `
+                        <div class="known-word-item">
+                            ${word.word}
+                            <button class="remove-known-btn" onclick="handleKnownWord('${word.word}', 'remove')">
+                                移除
+                            </button>
+                        </div>
+                    `).join('');
+                });
+        }
+
+        function handleKnownWord(word, action) {
+            fetch('/api/known-words', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({word, action})
+            }).then(() => {
+                if(action === 'add') loadData();
+                refreshKnownWords();
+            });
+        }
         // 事件监听
         document.getElementById('dateSelect').addEventListener('change', () => {
             currentPage = 1;  // 切换日期时重置到第一页

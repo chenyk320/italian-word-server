@@ -23,9 +23,65 @@ HISTORY_DIR = os.getenv("HISTORY_DIR", "/home/chen/italian-word-server/data/")
 TRANSLATE_TIMEOUT = int(os.getenv("TRANSLATE_TIMEOUT", "10"))
 PER_PAGE = int(os.getenv("PER_PAGE", "50"))
 MAX_WORKERS = int(os.getenv("MAX_WORKERS", "4"))
+KNOWN_WORDS_FILE = os.path.join(HISTORY_DIR, "known_words.json")
 
 # 初始化线程池
 executor = ThreadPoolExecutor(max_workers=MAX_WORKERS)
+
+
+if not os.path.exists(KNOWN_WORDS_FILE):
+    with open(KNOWN_WORDS_FILE, 'w') as f:
+        json.dump([], f)
+
+def get_known_words():
+    """获取已熟记单词列表"""
+    with open(KNOWN_WORDS_FILE, 'r') as f:
+        return set(json.load(f))
+
+def update_known_words(word: str, action: str):
+    """更新熟词列表"""
+    with open(KNOWN_WORDS_FILE, 'r+') as f:
+        words = set(json.load(f))
+        if action == 'add':
+            words.add(word.lower())
+        elif action == 'remove':
+            words.discard(word.lower())
+        f.seek(0)
+        json.dump(list(words), f)
+        f.truncate()
+
+# 添加新的API路由
+@app.route('/api/known-words', methods=['POST'])
+def handle_known_words():
+    try:
+        data = request.get_json()
+        word = data.get('word')
+        action = data.get('action')
+        
+        if not word or action not in ('add', 'remove'):
+            return jsonify({"error": "Invalid request"}), 400
+            
+        update_known_words(word, action)
+        return jsonify({"status": "success"})
+    
+    except Exception as e:
+        app.logger.error(f"熟词操作失败: {str(e)}")
+        return jsonify({"error": "服务器错误"}), 500
+
+# 修改现有的process_word函数
+def process_word(word: dict) -> dict:
+    """处理单个单词的格式化"""
+    text = word.get('text', '').strip().lower()
+    if not text or text in get_known_words():  # 过滤已熟记单词
+        return None
+
+    return {
+        "word": text,
+        "translation": get_cached_translation(text),
+        "count": word.get('count', 0),
+        "date": word.get('date', '')
+    }
+
 
 def get_available_dates():
     """获取所有历史日期"""
