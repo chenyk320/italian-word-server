@@ -1,0 +1,112 @@
+<!-- 新增 known_words.html -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>已熟记单词列表</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .back-link {
+            display: block;
+            margin: 20px 0;
+            color: #3498db;
+            text-decoration: none;
+        }
+        .sync-status {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← 返回主列表</a>
+        <h2>已熟记单词列表 <span id="wordCount" class="sync-status"></span></h2>
+        
+        <div class="control-panel">
+            <button onclick="refreshList()">刷新列表</button>
+            <span id="lastSync" class="sync-status"></span>
+        </div>
+
+        <div id="loading">加载中...</div>
+        <div id="knownWordsList" class="word-list"></div>
+    </div>
+
+    <script>
+        let lastUpdateTime = null;
+
+        // 初始化加载
+        function loadKnownWords() {
+            const loading = document.getElementById('loading');
+            const list = document.getElementById('knownWordsList');
+            
+            loading.innerHTML = '加载中...';
+            list.innerHTML = '';
+            
+            fetch('/api/known-words')
+                .then(response => response.json())
+                .then(data => {
+                    if(data.error) {
+                        loading.innerHTML = `错误：${data.error}`;
+                        return;
+                    }
+                    
+                    loading.style.display = 'none';
+                    list.innerHTML = data.words.map(word => `
+                        <div class="word-card">
+                            <div class="word-header">
+                                ${word.word}
+                                <span class="date-tag">
+                                    ${word.date_added || '未知日期'}
+                                </span>
+                            </div>
+                            <div class="word-meta">
+                                <span class="translation">${word.translation}</span>
+                                <button class="remove-known-btn" 
+                                        onclick="handleRemove('${word.word}')">
+                                    移出列表
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    document.getElementById('wordCount').textContent = 
+                        `(共 ${data.words.length} 个单词)`;
+                    lastUpdateTime = new Date();
+                    document.getElementById('lastSync').textContent = 
+                        `最后更新: ${lastUpdateTime.toLocaleTimeString()}`;
+                })
+                .catch(error => {
+                    console.error('加载失败:', error);
+                    loading.innerHTML = '数据加载失败';
+                });
+        }
+
+        function handleRemove(word) {
+            if(confirm(`确定要移除 ${word} 吗？`)) {
+                fetch('/api/known-words', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({word, action: 'remove'})
+                }).then(() => loadKnownWords());
+            }
+        }
+
+        function refreshList() {
+            loadKnownWords();
+        }
+
+        // 定时自动刷新（每5分钟）
+        setInterval(() => {
+            if(lastUpdateTime && (Date.now() - lastUpdateTime) > 300000) {
+                refreshList();
+            }
+        }, 60000);
+
+        // 初始加载
+        loadKnownWords();
+    </script>
+</body>
+</html>
