@@ -144,28 +144,25 @@
                     `).join('');
                 });
         }
-
         function handleKnownWord(word, translation) {
-            if(confirm(`确定将 ${word} 标记为已掌握吗？`)) {
-                fetch('/api/known-words', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        word: word,
-                        translation: translation,
-                        action: 'add'
-                    })
-                }).then(() => {
-                    loadData(); // 刷新主列表
-                    showSyncNotification();
-                });
-            }
+            fetch('/api/known-words', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    word: word,
+                    translation: translation,
+                    action: 'add'
+                })
+            }).then(() => {
+                loadData();
+                showSyncNotification('✓ 已添加到熟记列表');
+            });
         }
-
-        function showSyncNotification() {
+// 通用通知函数
+        function showSyncNotification(message) {
             const notification = document.createElement('div');
             notification.className = 'sync-notification';
-            notification.textContent = '✓ 已同步到熟记列表';
+            notification.textContent = message;
             document.body.appendChild(notification);
             setTimeout(() => notification.remove(), 2000);
         }

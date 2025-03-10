@@ -85,15 +85,23 @@
         }
 
         function handleRemove(word) {
-            if(confirm(`确定要移除 ${word} 吗？`)) {
-                fetch('/api/known-words', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({word, action: 'remove'})
-                }).then(() => loadKnownWords());
-            }
+            fetch('/api/known-words', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({word, action: 'remove'})
+            }).then(() => {
+                loadKnownWords();
+                showSyncNotification('✓ 已移出熟记列表'); 
+            });
         }
 
+        function showSyncNotification(message, duration=2000) {
+            const notification = document.createElement('div');
+            notification.className = 'sync-notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), duration);
+        }
         function refreshList() {
             loadKnownWords();
         }
