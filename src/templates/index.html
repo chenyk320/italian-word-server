@@ -93,6 +93,7 @@
         function createWordElement(word) {
             const div = document.createElement('div');
             div.className = 'word-card';
+            div.dataset.word = encodeURIComponent(word.word);  // 添加数据属性
             div.innerHTML = `
                 <div class="word-header">
                     ${word.word}
@@ -102,7 +103,7 @@
                     <span>出现次数：${word.count}</span>
                     <span class="translation">${word.translation}</span>
                     <button class="mark-known-btn" 
-                            onclick="handleKnownWord('${word.word}', '${word.translation}')">
+                            onclick="handleKnownWord(event, '${word.word}', '${word.translation}')">
                         标记为已掌握
                     </button>
                 </div>
@@ -144,7 +145,13 @@
                     `).join('');
                 });
         }
-        function handleKnownWord(word, translation) {
+        function handleKnownWord(event, word, translation) {
+            event.preventDefault();  // 阻止默认行为
+            event.stopPropagation(); // 防止事件冒泡
+
+            const card = event.target.closest('.word-card');
+            card.classList.add('fade-out'); // 添加动画类
+
             fetch('/api/known-words', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -153,9 +160,35 @@
                     translation: translation,
                     action: 'add'
                 })
-            }).then(() => {
-                loadData();
-                showSyncNotification('✓ 已添加到熟记列表');
+            }).then(response => {
+                if (response.ok) {
+                    // 直接移除对应单词卡片
+                    const cards = document.querySelectorAll('.word-card');
+                    cards.forEach(card => {
+                        if (card.querySelector('.word-header').innerText.includes(word)) {
+                            card.style.animation = 'fadeOut 0.3s';
+                            setTimeout(() => card.remove(), 300);
+                        }
+                    });
+                    showSyncNotification('✓ 已添加到熟记列表');
+                    
+                    // 更新分页计数（可选）
+                    if (totalWords > 0) {
+                        totalWords--;
+                        document.getElementById('pageInfo').textContent = 
+                            `第 ${currentPage} 页 / 共 ${totalPages} 页 (总计 ${totalWords} 词)`;
+                    }
+                }
+            }).then(response => {
+                if (response.ok) {
+                    setTimeout(() => {
+                        card.remove();
+                        // 更新计数等操作...
+                    }, 300); // 等待动画完成
+                }
+            }).catch(error => {
+                console.error('操作失败:', error);
+                showSyncNotification('✗ 操作失败，请重试');
             });
         }
 // 通用通知函数

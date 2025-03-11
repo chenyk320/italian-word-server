@@ -171,3 +171,38 @@ select {
     padding: 3px 10px;           /* 增加内边距 */
     border-radius: 5px;          /* 圆角增大 */
 }
+
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+}
+
+/* 单词卡片基础样式 */
+.word-card {
+    /* 其他原有样式保持不变... */
+    transition: all 0.3s ease; /* 添加默认过渡效果 */
+}
+
+/* 应用动画的类 */
+.fade-out {
+    animation: fadeOut 0.3s forwards;
+}
+
+/* 优化按钮过渡效果 */
+.mark-known-btn {
+    transition: 
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.mark-known-btn:hover {
+    background-color: #4CAF50;
+    transform: scale(1.05);
+}
